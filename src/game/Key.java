@@ -1,34 +1,25 @@
 package game;
 
-public class Key implements Item {
+public class Key extends Item {
 
-	@Override
-	public void interact(Actor actor) {
-		// TODO Auto-generated method stub
-
+	public void interaction(Actor actor) {
+		// TODO 
 	}
 
-	@Override
 	public boolean isContainable() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-	@Override
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int slotsNeeded() {
+		return 1;
 	}
 
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+	public String title() {
+		return "Key";
 	}
 
-	@Override
-	public String getDetailedDescription() {
-		// TODO Auto-generated method stub
+	public String description() {
+		// TODO
 		return null;
 	}
 

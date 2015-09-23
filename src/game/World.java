@@ -1,10 +1,8 @@
 package game;
 
-import game.Location.Terrain;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 
@@ -14,23 +12,22 @@ import java.util.Scanner;
 public class World {
 
 	private Location[][] worldMap;
-	private String mapFilename = "Map.txt";
-	private ArrayList<Actor> players;
+	private List<Actor> players;
 
-	public World() {
-		parseMap(mapFilename);
-		players = new ArrayList<Actor>();
+	public World(String mapFilename) {
+		worldMap = MapParser.parseMap(mapFilename);
+		players = new ArrayList<>();
 	}
-	
+
 	public void Move(Actor actor, Direction direction) {
 		// TODO
 	}
-	
+
 	public Location getLocation(int x, int y) {
 		return worldMap[x][y];
 	}
 
-	public ArrayList<Location> getAdjacent(Location loc) {
+	public List<Location> getAdjacent(Location loc) {
 		ArrayList<Location> adjacentLocations = new ArrayList<Location>();
 		int x = loc.getX();
 		int y = loc.getY();
@@ -52,54 +49,65 @@ public class World {
 		return adjacentLocations;
 	}
 
-	private void parseMap(String filename) {
-		// First read in the file and store as a List of rows
-		ArrayList<String> rows = new ArrayList<String>();
-		try{		
-			Scanner sc = new Scanner(new File(filename));
-			while (sc.hasNextLine()){
-				rows.add(sc.nextLine());
-			}
-			sc.close();
-		}catch (Exception e){
-			System.out.println("Error parsing map.");
-			System.out.println(e.toString());
-		}
-		// Now we can calculate map size and construct the array
-		worldMap = new Location[rows.size()][rows.get(0).length()];
+	public Location[][] getWorldMap() {
+		return worldMap;
+	}
 
-		// Then loop through the List, constructing Locations
-		int x = 0;
-		for(String row: rows){
-			int y = 0;
-			char[] rowChars = row.toCharArray();
-			for(char c: rowChars){
-				if ( !Terrain.terrainSymbols.containsKey(c) ){
-					throw new IllegalArgumentException("Invalid map format");
-				}
-				worldMap[x][y] = new Location(x, y, c);
-				y++;
-			}
-			x++;
+
+	/*
+	// Not sure where to put this ...
+	
+	public interface LocationRow extends Iterable<Location> {
+	}
+
+	public interface LocationGrid extends Iterable<LocationRow> {  
+	}
+
+	public class ArrayLocationRow implements LocationRow {
+		private Location[] locations;
+		public Iterator<Location> iterator() {
+			// ... or how to implement this method 
 		}
 	}
 
+	public class ArrayLocationGrid implements LocationGrid {
+		private LocationRow[] rows;
+		public Iterator<LocationRow> iterator() {
+			// ...
+		}
+	}
+
+	public class BoundedLocationGrid implements LocationGrid {
+		private ArrayLocationGrid delegate;
+		private int offsetX;
+		private int offsetY;
+		private int width;
+		private int height;
+		// ...
+		@Override
+		public Iterator<LocationRow> iterator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+	 */
+
 	public static void main(String[] args) {
-		World w = new World();
-		
+		World w = new World("Map.txt");
+
 		// print map
-		for(Location[] row: w.worldMap){
+		for(Location[] row: w.getWorldMap()){
 			String s = "";
 			for(Location loc: row){
 				s = s.concat(String.valueOf(loc.getTerrain().getSymbol()));
 			}
 			System.out.println(s);
 		}
-		
+
 		// test adjacent to centre location
 		System.out.println();
 		System.out.println("Locations adjacent to (2,2):");
-		ArrayList<Location> testAdjacent = w.getAdjacent(w.getLocation(2, 2));
+		List<Location> testAdjacent = w.getAdjacent(w.getLocation(2, 2));
 		for(Location loc: testAdjacent){
 			System.out.println(loc.toString());
 		}

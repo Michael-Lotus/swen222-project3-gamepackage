@@ -1,6 +1,6 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Container is anything that can hold Items. 
@@ -12,28 +12,33 @@ public interface Container {
 	/**
 	 * Total amount of space this Container has to store Items.
 	 */
-	public int getCapacity();
+	int getTotalSlots();
 	
 	/**
 	 * Amount of space currently occupied by Items.
 	 */
-	public int getCurrentLoad();
+	int getSlotsUsed();
 	
 	/**
 	 * @return List of all Items currently stored in this Container.
 	 */
-	public ArrayList<Item> getInventory();
+	List<Item> getItems();
+	
+	/**
+	 * @return true if this Container contains the specified Item.
+	 */
+	boolean contains(Item item);
 	
 	/**
 	 * Attempt to add an Item to this Container.
 	 * 
 	 * @return true if item was successfully added.
 	 */
-	public boolean addItem(Item item);
+	boolean addItem(Item item);
 	
 	/**
 	 * Remove specified Item from this Container
 	 */
-	public void removeItem(Item item);
+	void removeItem(Item item);
 
 }
