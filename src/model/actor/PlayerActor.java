@@ -1,8 +1,8 @@
-package game;
+package model.actor;
 
-public class Player extends Actor {
+public class PlayerActor extends AbstractActor {
 
-	public Player(int inventorySize) {
+	public PlayerActor(int inventorySize) {
 		super(inventorySize);
 	}
 

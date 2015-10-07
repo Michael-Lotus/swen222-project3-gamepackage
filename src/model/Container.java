@@ -1,6 +1,8 @@
-package game;
+package model;
 
 import java.util.List;
+
+import model.item.Item;
 
 /**
  * A Container is anything that can hold Items. 

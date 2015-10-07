@@ -1,4 +1,6 @@
-package game;
+package model.item;
+
+import model.actor.AbstractActor;
 
 /**
  * Represents some number of gold pieces.
@@ -9,6 +11,14 @@ public class Gold extends Item {
 	
 	private int amount;
 	
+	public Gold() {
+		this(1);
+	}
+	
+	public Gold(int amount) {
+		this.amount = amount;
+	}
+
 	public void adjustAmount(int amount) {
 		this.amount += amount;
 	}
@@ -17,7 +27,7 @@ public class Gold extends Item {
 		return amount;
 	}
 
-	public void interaction(Actor actor) {
+	public void interaction(AbstractActor actor) {
 		// TODO
 	}
 
@@ -30,12 +40,11 @@ public class Gold extends Item {
 	}
 
 	public String title() {
-		return amount+" Gold";
+		return amount+" gold";
 	}
 
 	public String description() {
-		// TODO
-		return null;
+		return "Oooh, shiny...";
 	}
 
 }

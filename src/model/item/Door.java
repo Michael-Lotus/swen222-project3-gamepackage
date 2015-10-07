@@ -1,4 +1,6 @@
-package game;
+package model.item;
+
+import model.actor.AbstractActor;
 
 public class Door extends Item implements Lockable {
 
@@ -27,12 +29,14 @@ public class Door extends Item implements Lockable {
 		return open;
 	}
 
-	public void interaction(Actor actor) {
-		if(locked){
-			if(actor.getInventory().contains(key)){
+	public void interaction(AbstractActor actor) {
+		if (locked) {
+			if (actor.getInventory().contains(key)) {
 				locked = false;
+				open = true;
+				// TODO notify player that their key worked
 			}
-			// TODO notify player?
+			// TODO notify player that door is locked
 		} else {
 			open = !open;
 		}

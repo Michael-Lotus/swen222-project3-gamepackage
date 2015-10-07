@@ -1,8 +1,10 @@
-package game;
+package model.item;
+
+import model.actor.AbstractActor;
 
 public class Key extends Item {
 
-	public void interaction(Actor actor) {
+	public void interaction(AbstractActor actor) {
 		// TODO 
 	}
 
@@ -19,8 +21,7 @@ public class Key extends Item {
 	}
 
 	public String description() {
-		// TODO
-		return null;
+		return "Wonder what this unlocks...";
 	}
 
 }

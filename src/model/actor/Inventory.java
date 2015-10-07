@@ -1,7 +1,10 @@
-package game;
+package model.actor;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Container;
+import model.item.Item;
 
 /**
  * The collection of Items carried by an Actor.
@@ -47,6 +50,17 @@ public class Inventory implements Container {
 
 	public boolean contains(Item item) {
 		return items.contains(item);
+	}
+	
+	@Override
+	public String toString() {
+		String s = "Inventory contents: [ ";
+		for(Item i: items){
+			s = s.concat(i.title()+", ");
+		}
+		s = (!items.isEmpty())? s.substring(0, s.lastIndexOf(",")) : s;
+		s = s.concat(" ]");
+		return s;
 	}
 
 }

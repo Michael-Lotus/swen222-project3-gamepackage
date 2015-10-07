@@ -1,4 +1,4 @@
-package game;
+package model;
 
 import java.util.Arrays;
 
@@ -29,6 +29,10 @@ public enum Terrain {
 		return symbol;
 	}
 	
+	/**
+	 * Returns the Terrain enum value whose symbol is equal to the specified char,
+	 * or null if there is no such Terrain.
+	 */
 	public static Terrain forSymbol(char c) {
 		return Arrays.stream(Terrain.values()).filter(t -> t.symbol == c).findFirst().orElse(null);
 	}

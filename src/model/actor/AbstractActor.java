@@ -1,16 +1,19 @@
-package game;
+package model.actor;
+
+import model.Container;
+import model.Location;
 
 /**
  * An Actor is anything that can move and interact with Items, and has an inventory.
  * 
  * @author Michael 300273397
  */
-public abstract class Actor {
+public abstract class AbstractActor {
 
 	private final Container inventory;
 	private Location location;
 	
-	public Actor(int inventorySize) {
+	public AbstractActor(int inventorySize) {
 		inventory = new Inventory(inventorySize);
 	}
 	
