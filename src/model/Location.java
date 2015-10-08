@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.actor.AbstractActor;
@@ -17,7 +18,9 @@ public class Location implements Container{
 
 	private final int x, y; 
 	private final Terrain terrain;
-	private final List<Item> items;
+	private final Door door;
+
+	private List<Item> items;
 	private AbstractActor actor;
 
 	/**
@@ -31,7 +34,7 @@ public class Location implements Container{
 		this.y = y;
 		terrain = t;
 		items = new ArrayList<Item>();
-		items.add(terrain.equals(Terrain.DOOR)? new Door(): null);
+		door = terrain.equals(Terrain.DOOR)? new Door(): null;
 	}
 
 	public int getX() {
@@ -47,16 +50,23 @@ public class Location implements Container{
 	}
 
 	public Door getDoor() {
-		for(Item i: items){
-			if(i instanceof Door){
-				return (Door)i;
-			}
-		}
-		return null;
+		return door;
 	}
 
 	public List<Item> getItems() {
-		return new ArrayList<Item>(items);
+		return Collections.unmodifiableList(items);
+	}
+
+	/**
+	 * Removes the first containable Item found at this Location and returns it.
+	 */
+	public Item popItem() {
+		for (Item item: items){
+			if (item.isContainable()){
+				return item;
+			}
+		}
+		return null;
 	}
 
 	public AbstractActor getActor() {
@@ -71,7 +81,7 @@ public class Location implements Container{
 			return false;
 		}
 	}
-	
+
 	public void removeActor() {
 		actor = null;
 	}
@@ -108,4 +118,5 @@ public class Location implements Container{
 		items.remove(item);
 	}
 
+	
 }

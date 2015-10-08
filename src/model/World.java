@@ -17,7 +17,7 @@ public class World {
 	private List<AbstractActor> actors;
 
 	public World(String mapFilename) {
-		worldMap = MapParser.parseMap(mapFilename);
+		worldMap = WorldGenerator.parseMap(mapFilename);
 		actors = new ArrayList<>();
 	}
 

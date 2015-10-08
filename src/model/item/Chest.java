@@ -1,6 +1,7 @@
 package model.item;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.Container;
@@ -32,7 +33,7 @@ public class Chest extends Item implements Container {
 	}
 
 	public List<Item> getItems() {
-		return new ArrayList<Item>(items);
+		return Collections.unmodifiableList(items);
 	}
 
 	public boolean contains(Item item) {

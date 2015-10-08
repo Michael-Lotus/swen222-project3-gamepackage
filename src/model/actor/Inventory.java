@@ -1,6 +1,7 @@
 package model.actor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.Container;
@@ -31,11 +32,11 @@ public class Inventory implements Container {
 	}
 	
 	public List<Item> getItems() {
-		return new ArrayList<Item>(items);
+		return Collections.unmodifiableList(items);
 	}
 	
 	public boolean addItem(Item item) {
-		if ( !item.isContainable() || (item.slotsNeeded()+slotsUsed) > totalSlots ){
+		if ( !item.isContainable() || (item.slotsNeeded()+slotsUsed) > totalSlots || item == null ){
 			return false;
 		}
 		items.add(item);

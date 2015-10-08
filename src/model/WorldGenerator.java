@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 
  * @author Michael 300273397
  */
-public class MapParser {
+public class WorldGenerator {
 	
 	public static Location[][] parseMap(String filename) {
 		Location[][] map;
@@ -43,5 +43,9 @@ public class MapParser {
 			x++;
 		}
 		return map;
+	}
+	
+	public static void parseItems(World world, String filename) {
+		// TODO 
 	}
 }

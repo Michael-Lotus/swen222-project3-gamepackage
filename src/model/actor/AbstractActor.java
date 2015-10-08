@@ -10,11 +10,16 @@ import model.Location;
  */
 public abstract class AbstractActor {
 
-	private final Container inventory;
-	private Location location;
+	protected final ActorStats stats;
+	protected final Container inventory;
+	protected Location location;
 	
-	public AbstractActor(int inventorySize) {
-		inventory = new Inventory(inventorySize);
+	public AbstractActor() {
+		stats = new ActorStats();
+		stats.STR = 10;
+		stats.AGI = 10;
+		stats.INT = 10;
+		inventory = new Inventory(stats.STR);
 	}
 	
 	public Container getInventory() {
@@ -32,13 +37,20 @@ public abstract class AbstractActor {
 	/**
 	 * Attempt to pick up any Item(s) at current Location.
 	 */
-	public abstract void pickUp();
+	public abstract String pickUp();
 	
 	/**
 	 * Interact with any Item(s) at current Location.
 	 */
 	public abstract void interact();
 	
-	
+	/**
+	 * STR: Strength determines weapon damage and inventory size
+	 * AGI: Agility determines weapon hit chance and speed
+	 * INT: Intellect determines spell damage and literacy
+	 */
+	protected class ActorStats {
+		public int STR, AGI, INT;
+	}
 	
 }
