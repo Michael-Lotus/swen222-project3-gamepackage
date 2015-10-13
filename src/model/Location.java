@@ -33,7 +33,7 @@ public class Location implements Container{
 		this.x = x;
 		this.y = y;
 		terrain = t;
-		items = new ArrayList<Item>();
+		items = new ArrayList<>();
 		door = terrain.equals(Terrain.DOOR)? new Door(): null;
 	}
 

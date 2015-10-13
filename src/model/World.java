@@ -36,13 +36,16 @@ public class World {
 	public Location getLocation(int x, int y) {
 		return worldMap[x][y];
 	}
-	
+
 	public Location getAdjacent(Location loc, Direction dir) {
 		return worldMap[ loc.getX() + dir.getX() ][ loc.getY() + dir.getY() ];
 	}
 
 	public List<Location> getAllAdjacent(Location loc) {
-		ArrayList<Location> adjacentLocations = new ArrayList<Location>();
+
+		// return new BoundedLocationGrid(this.locationGrid, loc.x - 1, loc.y - 1, 3, 3);
+
+		ArrayList<Location> adjacentLocations = new ArrayList<>();
 		int x = loc.getX();
 		int y = loc.getY();
 		for(Direction direction: Direction.values()){
@@ -62,6 +65,58 @@ public class World {
 		return worldMap;
 	}
 
+
+/*
+ *  --- EXAMPLE ITERATOR ---
+ *  
+	import java.util.Arrays;
+	import java.util.Iterator;
+
+	public class StringRow implements Iterable<String>{
+
+		private String[] strings;
+
+		@Override
+		public Iterator<String> iterator() {
+			return Arrays.asList(strings).iterator();
+		}
+	
+	}
+	
+	StreamSupport.stream(iterable.spliterator(), false);
+	stream.forEach(x -> renderLocation( x ));
+	
+	--- EXAMPLE LocationGrid IMPLIMENTATION ---
+
+	interface LocationRow extends Iterable<Location> {
+	}
+
+	interface LocationGrid extends Iterable<LocationRow> {  
+	}
+
+	class ArrayLocationRow implements LocationRow {
+		private Location[] locations;
+		Iterator<Location> iterator() {
+			// ...
+		}
+	}
+
+	class ArrayLocationGrid implements LocationGrid {
+		private LocationRow[] rows;
+		Iterator<LocationRow> iterator() {
+			// ...
+		}
+	}
+
+	class BoundedLocationGrid implements LocationGrid {
+		private ArrayLocationGrid delegate;
+		private int offsetX;
+		private int offsetY;
+		private int width;
+		private int height;
+		// ...
+	}
+*/
 
 	public static void main(String[] args) {
 		World w = new World("Map.txt");
@@ -89,8 +144,8 @@ public class World {
 		for(Location loc: testAdjacent){
 			System.out.println(loc.toString());
 		}
-		
-		
+
+
 	}
 
 }
