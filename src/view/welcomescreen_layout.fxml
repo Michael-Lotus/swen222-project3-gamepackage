@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import controller.*?>
+
+<GridPane alignment="CENTER" hgap="10" prefHeight="321.0" prefWidth="340.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Controller">
+
+	<padding>
+		<Insets bottom="10" left="25" right="25" top="25" />
+	</padding>
+
+	<stylesheets>
+		<URL value="@welcomescreen_style.css" />
+	</stylesheets>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="newGameButton" blendMode="DARKEN" mnemonicParsing="false" onAction="#newGame" prefHeight="25.0" prefWidth="100.0" text="New Game">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#000000bf" offsetX="2.0" offsetY="3.0" />
+               </effect></Button>
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="100.0" text="Exit">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#000000bf" offsetX="2.0" offsetY="3.0" />
+               </effect></Button>
+         </children>
+      </VBox>
+   </children>
+
+</GridPane>
