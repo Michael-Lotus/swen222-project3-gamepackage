@@ -59,4 +59,9 @@ public class Door extends Item implements Lockable {
 		return null;
 	}
 
+	@Override
+	public String id() {
+		return open? "door_open": "door_closed";
+	}
+
 }

@@ -9,7 +9,6 @@ import model.actor.AbstractActor;
  */
 public abstract class Item {
 	
-
 	public abstract void interaction(AbstractActor actor);
 	
 	/**
@@ -31,4 +30,9 @@ public abstract class Item {
 	 * @return long (flavour text) description of this item.
 	 */
 	public abstract String description();
+	
+	
+	public abstract String id();
+	
+	
 }

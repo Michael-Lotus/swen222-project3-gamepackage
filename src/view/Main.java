@@ -1,11 +1,16 @@
 package view;
 
+import model.Level;
 import control.Controller;
+import view.render.MainPane;
 import view.ui.MainStage;
 import view.ui.WelcomeStage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,6 +22,9 @@ public class Main extends Application {
 	
 	private Stage welcomeScreen = new WelcomeStage(StageStyle.UTILITY);
 	private Stage mainScreen = new MainStage();
+	
+	private Level level;
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -24,23 +32,33 @@ public class Main extends Application {
 		// load welcome screen fxml document
 		FXMLLoader loader;
 		try { loader = new FXMLLoader(getClass().getResource("welcomescreen_layout.fxml")); } 
-		catch (Exception e) { throw new Exception("Error loading welcomescreen_layout.fxml", e); }
+		catch (Exception e) { throw new Exception("ERROR LOADING 'welcomescreen_layout.fxml'", e); }
 		Pane root = loader.load();
 		
-		// provide controller with a reference to this instantiation of Main
+		// provide the controller with a reference to this instantiation of Main
 		loader.<Controller>getController().setMainApplication(this);
 		
 		welcomeScreen.setScene(new Scene(root));
 		welcomeScreen.show();
 	}
 	
+	
 	public void startNewGame() {
+		try { loadLevel(new Level("data/map.txt")); } 
+		catch (Exception e) { throw new IllegalArgumentException ("ERROR LOADING LEVEL", e); }
+		
+		MainPane pane = new MainPane(level);
+		mainScreen.setScene(new Scene(pane));
+		pane.loadLocations();
+		
 		mainScreen.show();
 	}
 	
-	public void exit() {
-		
+	
+	public void loadLevel(Level level) {
+		this.level = level;
 	}
+	
 
 	public static void main(String[] args) {
 		launch(args);

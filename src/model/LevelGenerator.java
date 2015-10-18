@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import model.item.Door;
+import model.item.Item;
+
 /**
  * 
  * @author Michael 300273397
  */
-public class WorldGenerator {
-	
+public class LevelGenerator {
+
+
 	public static Location[][] parseMap(String filename) {
 		Location[][] map;
 		// First read in the file and store as a List of rows
@@ -22,7 +26,7 @@ public class WorldGenerator {
 			}
 			sc.close();
 		}catch (Exception e){
-			throw new RuntimeException("Error parsing map", e);
+			throw new RuntimeException("ERROR PARSING MAP", e);
 		}
 		// Now we can calculate map size and construct the array
 		map = new Location[rows.size()][rows.get(0).length()];
@@ -32,20 +36,29 @@ public class WorldGenerator {
 		for(String row: rows){
 			int y = 0;
 			char[] rowChars = row.toCharArray();
+
 			for(char c: rowChars){
-				Terrain t = Terrain.forSymbol(c);
-				if ( t == null ){
-					throw new IllegalArgumentException("Invalid map format");
+				System.out.println("Parsing: "+c);
+				Terrain terrain = Terrain.forSymbol(c);
+				map[x][y] = new Location(x, y, terrain);
+				Item item = forSymbol(c);
+				if (item != null) { 
+					map[x][y].addItem(item); 
+					System.out.println(item.title()+" added at location "+x+", "+y); 
 				}
-				map[x][y] = new Location(x, y, t);
 				y++;
 			}
 			x++;
 		}
 		return map;
 	}
-	
-	public static void parseItems(World world, String filename) {
-		// TODO 
+
+
+	private static Item forSymbol(char c) {
+		switch (c) {
+		case '/': return new Door();
+		default: return null;
+		}
 	}
+
 }

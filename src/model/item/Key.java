@@ -4,6 +4,7 @@ import model.actor.AbstractActor;
 
 public class Key extends Item {
 
+
 	public void interaction(AbstractActor actor) {
 		// TODO 
 	}
@@ -22,6 +23,11 @@ public class Key extends Item {
 
 	public String description() {
 		return "Wonder what this unlocks...";
+	}
+
+	@Override
+	public String id() {
+		return "key";
 	}
 
 }

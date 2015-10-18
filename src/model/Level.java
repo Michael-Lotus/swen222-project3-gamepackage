@@ -11,15 +11,17 @@ import model.actor.AbstractActor;
  * 
  * @author Michael 300273397
  */
-public class World {
+public class Level {
 
-	private Location[][] worldMap;
+	private Location[][] levelMap;
 	private List<AbstractActor> actors;
 
-	public World(String mapFilename) {
-		worldMap = WorldGenerator.parseMap(mapFilename);
+	
+	public Level(String mapFilename) {
+		levelMap = LevelGenerator.parseMap(mapFilename);
 		actors = new ArrayList<>();
 	}
+	
 
 	public boolean moveActor(AbstractActor actor, Direction dir) {
 		Location oldLoc = actor.getLocation();
@@ -32,14 +34,17 @@ public class World {
 		newLoc.setActor(actor);
 		return true;
 	}
+	
 
 	public Location getLocation(int x, int y) {
-		return worldMap[x][y];
+		return levelMap[x][y];
 	}
+	
 
 	public Location getAdjacent(Location loc, Direction dir) {
-		return worldMap[ loc.getX() + dir.getX() ][ loc.getY() + dir.getY() ];
+		return levelMap[ loc.getX() + dir.getX() ][ loc.getY() + dir.getY() ];
 	}
+	
 
 	public List<Location> getAllAdjacent(Location loc) {
 
@@ -51,24 +56,25 @@ public class World {
 		for(Direction direction: Direction.values()){
 			int newX = x + direction.getX();
 			int newY = y + direction.getY();
-			if(newX < 0 || newX >= worldMap.length
-					|| newY < 0 || newY >= worldMap.length){
+			if(newX < 0 || newX >= levelMap.length
+					|| newY < 0 || newY >= levelMap.length){
 				// if a direction would go out of bounds, skip it
 				continue;
 			}
-			adjacentLocations.add(worldMap[newX][newY]);
+			adjacentLocations.add(levelMap[newX][newY]);
 		}
 		return adjacentLocations;
 	}
+	
 
-	public Location[][] getWorldMap() {
-		return worldMap;
+	public Location[][] getLevelMap() {
+		return levelMap;
 	}
 
 
-/*
- *  --- EXAMPLE ITERATOR ---
- *  
+	/*
+	 *  --- EXAMPLE ITERATOR ---
+	 *  
 	import java.util.Arrays;
 	import java.util.Iterator;
 
@@ -116,13 +122,14 @@ public class World {
 		private int height;
 		// ...
 	}
-*/
+ 	*/
 
+	/*
 	public static void main(String[] args) {
-		World w = new World("Map.txt");
+		Level w = new Level("data/map.txt");
 
 		// print map
-		for(Location[] row: w.getWorldMap()){
+		for(Location[] row: w.getLevelMap()){
 			String s = "";
 			for(Location loc: row){
 				s = s.concat(String.valueOf(loc.getTerrain().getSymbol()));
@@ -144,8 +151,7 @@ public class World {
 		for(Location loc: testAdjacent){
 			System.out.println(loc.toString());
 		}
-
-
 	}
+	*/
 
 }

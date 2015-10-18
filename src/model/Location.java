@@ -18,7 +18,7 @@ public class Location implements Container{
 
 	private final int x, y; 
 	private final Terrain terrain;
-	private final Door door;
+	private Door door;
 
 	private List<Item> items;
 	private AbstractActor actor;
@@ -34,31 +34,36 @@ public class Location implements Container{
 		this.y = y;
 		terrain = t;
 		items = new ArrayList<>();
-		door = terrain.equals(Terrain.DOOR)? new Door(): null;
 	}
+	
 
 	public int getX() {
 		return x;
 	}
+	
 
 	public int getY() {
 		return y;
 	}
+	
 
 	public Terrain getTerrain() {
 		return terrain;
 	}
+	
 
 	public Door getDoor() {
 		return door;
 	}
 
+	
 	public List<Item> getItems() {
 		return Collections.unmodifiableList(items);
 	}
 
+	
 	/**
-	 * Removes the first containable Item found at this Location and returns it.
+	 * Removes the first (containable) Item found at this Location and returns it.
 	 */
 	public Item popItem() {
 		for (Item item: items){
@@ -68,10 +73,12 @@ public class Location implements Container{
 		}
 		return null;
 	}
+	
 
 	public AbstractActor getActor() {
 		return actor;
 	}
+	
 
 	public boolean setActor(AbstractActor a) {
 		if (actor==null) {
@@ -81,10 +88,12 @@ public class Location implements Container{
 			return false;
 		}
 	}
+	
 
 	public void removeActor() {
 		actor = null;
 	}
+	
 
 	public String toString() {
 		String s = "Location ("+x+", "+y+") \n"
@@ -92,31 +101,46 @@ public class Location implements Container{
 				+ "Items: " + items.toString();
 		return s;
 	}
+	
 
 	@Override
 	public int getTotalSlots() {
 		return Integer.MAX_VALUE;
 	}
+	
 
 	@Override
 	public int getSlotsUsed() {
 		return 0;
 	}
+	
 
 	@Override
 	public boolean contains(Item item) {
 		return items.contains(item);
 	}
+	
 
 	@Override
 	public boolean addItem(Item item) {
-		return items.add(item);
+		if (item instanceof Door){
+			door = (Door) item;
+			return true;
+		} else {
+			return items.add(item);
+		}
 	}
 
+	
 	@Override
 	public void removeItem(Item item) {
 		items.remove(item);
 	}
 
-	
+
+	public boolean isEmpty() {
+		return items.isEmpty();
+	}
+
+
 }

@@ -91,6 +91,13 @@ public class Chest extends Item implements Container {
 	}
 
 	
+	@Override
+	public String id() {
+		return items.isEmpty()? "chest_open": "chest_closed";
+	}
+	
+	
+	/*
 	public static void main(String[] args) {
 		Chest chest = new Chest(10);
 		System.out.println("new TreasureChest(10)");
@@ -110,5 +117,7 @@ public class Chest extends Item implements Container {
 		System.out.println("slotsUsed = " + chest.getSlotsUsed());
 		System.out.println(chest.toString());
 	}
+	*/
+
 	
 }

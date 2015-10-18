@@ -10,30 +10,36 @@ import java.util.Arrays;
 public enum Terrain {
 	
 	WALL(false, '#'), 
-	FLOOR(true, '.'), 
-	DOOR(true, '/');
+	FLOOR(true, '.');
 
+	
 	private final boolean isTraversable;
 	private final char symbol;
+	
 
 	private Terrain(boolean traversable, char symbol) {
 		isTraversable = traversable;
 		this.symbol = symbol;
 	}
+	
 
 	public boolean isTraversable() {
 		return isTraversable;
 	}
+	
 
 	public char getSymbol() {
 		return symbol;
 	}
 	
+	
 	/**
-	 * Returns the Terrain enum value whose symbol is equal to the specified char,
-	 * or null if there is no such Terrain.
+	 * Returns WALL if symbol is '#', or FLOOR otherwise.
 	 */
 	public static Terrain forSymbol(char c) {
-		return Arrays.stream(Terrain.values()).filter(t -> t.symbol == c).findFirst().orElse(null);
+		// Returns the Terrain enum value whose symbol is equal to the specified char, 
+		// or null if there is no such Terrain.
+		// return Arrays.stream(Terrain.values()).filter(t -> t.symbol == c).findFirst().orElse(null);
+		return (c=='#')? WALL: FLOOR;
 	}
 }
