@@ -1,6 +1,8 @@
 package view;
 
 import model.Level;
+import model.actor.*;
+
 import control.Controller;
 import view.render.MainPane;
 import view.ui.MainStage;
@@ -8,9 +10,6 @@ import view.ui.WelcomeStage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -46,10 +45,14 @@ public class Main extends Application {
 	public void startNewGame() {
 		try { loadLevel(new Level("data/map.txt")); } 
 		catch (Exception e) { throw new IllegalArgumentException ("ERROR LOADING LEVEL", e); }
+
+		Actor actor = new NonPlayerActor();
+		level.addActor(actor, 1, 1);
 		
 		MainPane pane = new MainPane(level);
 		mainScreen.setScene(new Scene(pane));
 		pane.loadLocations();
+		
 		
 		mainScreen.show();
 	}

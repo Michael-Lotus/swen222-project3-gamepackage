@@ -1,6 +1,6 @@
 package model.item;
 
-import model.actor.AbstractActor;
+import model.actor.Actor;
 
 public class Door extends Item implements Lockable {
 
@@ -29,7 +29,7 @@ public class Door extends Item implements Lockable {
 		return open;
 	}
 
-	public void interaction(AbstractActor actor) {
+	public void interaction(Actor actor) {
 		if (locked) {
 			if (actor.getInventory().contains(key)) {
 				locked = false;
@@ -61,7 +61,7 @@ public class Door extends Item implements Lockable {
 
 	@Override
 	public String id() {
-		return open? "door_open": "door_closed";
+		return open? "Door_Open": "Door_Closed";
 	}
 
 }

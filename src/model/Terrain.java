@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-
 /**
  * Represents the different types of terrain, and whether they are traversable or not.
  * 

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import model.item.Chest;
 import model.item.Door;
+import model.item.Gold;
 import model.item.Item;
 
 /**
@@ -38,7 +40,7 @@ public class LevelGenerator {
 			char[] rowChars = row.toCharArray();
 
 			for(char c: rowChars){
-				System.out.println("Parsing: "+c);
+				//System.out.println("Parsing: "+c+", x="+x+", y="+y);
 				Terrain terrain = Terrain.forSymbol(c);
 				map[x][y] = new Location(x, y, terrain);
 				Item item = forSymbol(c);
@@ -57,6 +59,8 @@ public class LevelGenerator {
 	private static Item forSymbol(char c) {
 		switch (c) {
 		case '/': return new Door();
+		case '$': return new Gold(10);
+		case 'X': return new Chest();
 		default: return null;
 		}
 	}

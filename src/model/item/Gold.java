@@ -1,6 +1,6 @@
 package model.item;
 
-import model.actor.AbstractActor;
+import model.actor.Actor;
 
 /**
  * Represents some number of gold pieces.
@@ -32,7 +32,7 @@ public class Gold extends Item {
 	}
 
 	
-	public void interaction(AbstractActor actor) {
+	public void interaction(Actor actor) {
 		// TODO
 	}
 
@@ -58,7 +58,7 @@ public class Gold extends Item {
 
 	
 	public String id() {
-		return "gold";
+		return "Gold";
 	}
 
 }

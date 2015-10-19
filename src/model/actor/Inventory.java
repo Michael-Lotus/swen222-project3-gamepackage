@@ -14,26 +14,36 @@ import model.item.Item;
  */
 public class Inventory implements Container {
 
-	private final int totalSlots;
+	private int totalSlots;
 	private int slotsUsed;
 	private List<Item> items;
+	
 	
 	public Inventory(int size) {
 		totalSlots = size;
 		items = new ArrayList<>();
 	}
 
+	
 	public int getTotalSlots() {
 		return totalSlots;
 	}
+	
+	
+	public void setTotalSlots(int size) {
+		totalSlots = size;
+	}
+
 	
 	public int getSlotsUsed() {
 		return slotsUsed;
 	}
 	
+	
 	public List<Item> getItems() {
 		return Collections.unmodifiableList(items);
 	}
+	
 	
 	public boolean addItem(Item item) {
 		if ( !item.isContainable() || (item.slotsNeeded()+slotsUsed) > totalSlots || item == null ){
@@ -43,11 +53,13 @@ public class Inventory implements Container {
 		slotsUsed += item.slotsNeeded();
 		return true;
 	}
+	
 
 	public void removeItem(Item item) {
 		items.remove(item);
 		slotsUsed -= item.slotsNeeded();
 	}
+	
 
 	public boolean contains(Item item) {
 		return items.contains(item);

@@ -8,18 +8,19 @@ import model.Location;
  * 
  * @author Michael 300273397
  */
-public abstract class AbstractActor {
+public abstract class Actor {
 
 	protected final ActorStats stats;
 	protected final Container inventory;
 	protected Location location;
 	
-	public AbstractActor() {
+	public Actor() {
 		stats = new ActorStats();
-		stats.STR = 10;
-		stats.AGI = 10;
-		stats.INT = 10;
-		inventory = new Inventory(stats.STR);
+		inventory = new Inventory(stats.getStrength());
+	}
+	
+	public ActorStats getStats() {
+		return stats;
 	}
 	
 	public Container getInventory() {
@@ -43,14 +44,9 @@ public abstract class AbstractActor {
 	 * Interact with any Item(s) at current Location.
 	 */
 	public abstract void interact();
-	
-	/**
-	 * STR: Strength determines weapon damage and inventory size
-	 * AGI: Agility determines weapon hit chance and speed
-	 * INT: Intellect determines spell damage and literacy
-	 */
-	protected class ActorStats {
-		public int STR, AGI, INT;
+
+	public String id() {
+		return "Actor_Default";
 	}
 	
 }

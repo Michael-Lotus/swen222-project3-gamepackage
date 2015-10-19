@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import model.Container;
-import model.actor.AbstractActor;
+import model.actor.Actor;
 
 /**
  * A Chest is an immovable Item and Container
@@ -14,9 +14,14 @@ import model.actor.AbstractActor;
  */
 public class Chest extends Item implements Container {
 
-	private final int totalSlots;
+	private int totalSlots;
 	private int slotsUsed;
 	private List<Item> items;
+	
+	
+	public Chest() {
+		this(10);
+	}
 	
 	public Chest(int size) {
 		totalSlots = size;
@@ -24,22 +29,32 @@ public class Chest extends Item implements Container {
 		items = new ArrayList<>();
 	}
 	
+	
 	public int getTotalSlots() {
 		return totalSlots;
 	}
+
+
+	public void setTotalSlots(int size) {
+		totalSlots = size;
+	}
+	
 
 	public int getSlotsUsed() {
 		return slotsUsed;
 	}
 
+	
 	public List<Item> getItems() {
 		return Collections.unmodifiableList(items);
 	}
+	
 
 	public boolean contains(Item item) {
 		return items.contains(item);
 	}
 
+	
 	public boolean addItem(Item item) {
 		if ( !item.isContainable() || (item.slotsNeeded()+slotsUsed) > totalSlots ){
 			return false;
@@ -49,12 +64,14 @@ public class Chest extends Item implements Container {
 		return true;
 	}
 
+	
 	public void removeItem(Item item) {
 		items.remove(item);
 		slotsUsed -= item.slotsNeeded();
 	}
+	
 
-	public void interaction(AbstractActor actor) {
+	public void interaction(Actor actor) {
 		for(Item i: items){
 			if (!actor.getInventory().addItem(i)){
 				// TODO inventory full; notify
@@ -62,22 +79,27 @@ public class Chest extends Item implements Container {
 		}
 	}
 
+	
 	public boolean isContainable() {
 		return false;
 	}
 
+	
 	public int slotsNeeded() {
 		return Integer.MAX_VALUE;
 	}
 
+	
 	public String title() {
 		return "Treasure Chest";
 	}
+	
 
 	public String description() {
 		// TODO
 		return null;
 	}
+	
 	
 	@Override
 	public String toString() {
@@ -93,8 +115,9 @@ public class Chest extends Item implements Container {
 	
 	@Override
 	public String id() {
-		return items.isEmpty()? "chest_open": "chest_closed";
+		return items.isEmpty()? "Chest_Open": "Chest_Closed";
 	}
+
 	
 	
 	/*

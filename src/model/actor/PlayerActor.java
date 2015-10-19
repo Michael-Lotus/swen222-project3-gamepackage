@@ -2,18 +2,20 @@ package model.actor;
 
 import model.item.Item;
 
-public class PlayerActor extends AbstractActor {
+public class PlayerActor extends Actor {
 
-	private ActorClassType classType;
+	private ActorProfession profession;
 
-	public PlayerActor(ActorClassType playerClass) {
+	public PlayerActor(ActorProfession playerClass) {
 		super();
-		classType = playerClass;
-		stats.STR = classType.getSTR();
-		stats.AGI = classType.getAGI();
-		stats.INT = classType.getINT();
+		profession = playerClass;
+		stats.setStrength(profession.getSTR());
+		stats.setAgility(profession.getAGI());
+		stats.setIntellect(profession.getINT());
+		inventory.setTotalSlots(stats.getStrength());
 	}
 
+	
 	@Override
 	public String pickUp() {
 		Item item = location.popItem();
@@ -25,9 +27,17 @@ public class PlayerActor extends AbstractActor {
 		}
 		return null;
 	}
+	
 
 	@Override
 	public void interact() {
-		// TODO Auto-generated method stub
+		
 	}
+	
+	
+	@Override
+	public String id() {
+		return "Actor_"+profession.getTitle();
+	}
+	
 }

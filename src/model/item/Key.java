@@ -1,11 +1,11 @@
 package model.item;
 
-import model.actor.AbstractActor;
+import model.actor.Actor;
 
 public class Key extends Item {
 
 
-	public void interaction(AbstractActor actor) {
+	public void interaction(Actor actor) {
 		// TODO 
 	}
 
@@ -27,7 +27,7 @@ public class Key extends Item {
 
 	@Override
 	public String id() {
-		return "key";
+		return "Key";
 	}
 
 }

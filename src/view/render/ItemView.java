@@ -1,15 +1,7 @@
 package view.render;
 
-import model.Location;
 import model.item.Item;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
-
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -18,12 +10,11 @@ import javafx.scene.image.ImageView;
  */
 public class ItemView extends ImageView {
 	
-private final Item item;
-	
+	private Item item;
 	
 	public ItemView(Item item) {
 		this.item = item;
-		System.out.println("LOADING: images/" + item.id() + ".png");
+		//System.out.println("LOADING: images/" + item.id() + ".png");
 		try {
 		     this.setImage(new Image("file:images/" + item.id() + ".png"));
 		} catch (Exception e) {
@@ -31,9 +22,9 @@ private final Item item;
 		}
 	}
 	
-
-	public Item getLocation() {
+	
+	public Item getItem() {
 		return item;
 	}
-
+	
 }

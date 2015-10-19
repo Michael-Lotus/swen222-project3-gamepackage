@@ -1,10 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import model.actor.AbstractActor;
+import model.actor.Actor;
 
 /**
  * Stores the map of all locations, and manages the movement of actors between them.
@@ -14,7 +13,7 @@ import model.actor.AbstractActor;
 public class Level {
 
 	private Location[][] levelMap;
-	private List<AbstractActor> actors;
+	private List<Actor> actors;
 
 	
 	public Level(String mapFilename) {
@@ -22,8 +21,20 @@ public class Level {
 		actors = new ArrayList<>();
 	}
 	
+	
+	public void addActor(Actor actor, int x, int y) {
+		
+		if (levelMap[x][y].getActor() != null || levelMap[x][y].getTerrain() == Terrain.WALL) {
+			throw new IllegalArgumentException("Cannot place Actor at Location ("+x+","+y+")");
+		}
+		
+		actors.add(actor);
+		actor.setLocation(levelMap[x][y]);
+		levelMap[x][y].setActor(actor);
+	}
+	
 
-	public boolean moveActor(AbstractActor actor, Direction dir) {
+	public boolean moveActor(Actor actor, Direction dir) {
 		Location oldLoc = actor.getLocation();
 		Location newLoc = getAdjacent(oldLoc, dir);
 		if(newLoc.getActor() != null){
@@ -42,7 +53,7 @@ public class Level {
 	
 
 	public Location getAdjacent(Location loc, Direction dir) {
-		return levelMap[ loc.getX() + dir.getX() ][ loc.getY() + dir.getY() ];
+		return levelMap[ loc.getY() + dir.getX() ][ loc.getX() + dir.getY() ];
 	}
 	
 
@@ -51,8 +62,8 @@ public class Level {
 		// return new BoundedLocationGrid(this.locationGrid, loc.x - 1, loc.y - 1, 3, 3);
 
 		ArrayList<Location> adjacentLocations = new ArrayList<>();
-		int x = loc.getX();
-		int y = loc.getY();
+		int x = loc.getY();
+		int y = loc.getX();
 		for(Direction direction: Direction.values()){
 			int newX = x + direction.getX();
 			int newY = y + direction.getY();

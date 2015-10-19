@@ -16,6 +16,12 @@ public interface Container {
 	 */
 	int getTotalSlots();
 	
+
+	/**
+	 * Set the size of this Container.
+	 */
+	void setTotalSlots(int size);
+	
 	/**
 	 * Amount of space currently occupied by Items.
 	 */
@@ -42,5 +48,6 @@ public interface Container {
 	 * Remove specified Item from this Container
 	 */
 	void removeItem(Item item);
+
 
 }

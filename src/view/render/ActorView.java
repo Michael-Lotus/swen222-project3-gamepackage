@@ -1,12 +1,7 @@
 package view.render;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
-
-import javafx.scene.Node;
+import model.actor.Actor;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -14,6 +9,21 @@ import javafx.scene.image.ImageView;
  */
 public class ActorView extends ImageView {
 
+	private Actor actor;
 	
+	public ActorView(Actor actor) {
+		this.actor = actor;
+		//System.out.println("LOADING: images/" + actor.id() + ".png");
+		try {
+		     this.setImage(new Image("file:images/" + actor.id() + ".png"));
+		} catch (Exception e) {
+			throw new IllegalArgumentException("ERROR LOADING ITEM IMAGE", e);
+		}
+	}
+	
+	
+	public Actor getActor() {
+		return actor;
+	}
 
 }

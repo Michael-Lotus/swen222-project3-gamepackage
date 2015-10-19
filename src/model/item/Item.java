@@ -1,6 +1,6 @@
 package model.item;
 
-import model.actor.AbstractActor;
+import model.actor.Actor;
 
 /**
  * An Item is any inanimate object that can be interacted with by a Character.
@@ -9,7 +9,7 @@ import model.actor.AbstractActor;
  */
 public abstract class Item {
 	
-	public abstract void interaction(AbstractActor actor);
+	public abstract void interaction(Actor actor);
 	
 	/**
 	 * Whether or not this Item can be stored in a Container.

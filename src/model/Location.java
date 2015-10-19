@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import model.actor.AbstractActor;
+import model.actor.Actor;
 import model.item.Door;
 import model.item.Item;
 
@@ -16,18 +16,19 @@ import model.item.Item;
  */
 public class Location implements Container{
 
-	private final int x, y; 
+	private final int y, x; 
 	private final Terrain terrain;
 	private Door door;
 
 	private List<Item> items;
-	private AbstractActor actor;
+	private Actor actor;
 
+	
 	/**
 	 * Construct a Location with specified coordinates and terrain type.
 	 * @param x - east/west coordinate
 	 * @param y - north/south coordinate
-	 * @param t - Terrain enum
+	 * @param t - Terrain type enum
 	 */
 	public Location(int x, int y, Terrain t) {
 		this.x = x;
@@ -37,13 +38,13 @@ public class Location implements Container{
 	}
 	
 
-	public int getX() {
-		return x;
+	public int getY() {
+		return y;
 	}
 	
 
-	public int getY() {
-		return y;
+	public int getX() {
+		return x;
 	}
 	
 
@@ -75,12 +76,12 @@ public class Location implements Container{
 	}
 	
 
-	public AbstractActor getActor() {
+	public Actor getActor() {
 		return actor;
 	}
 	
 
-	public boolean setActor(AbstractActor a) {
+	public boolean setActor(Actor a) {
 		if (actor==null) {
 			actor = a;
 			return true;
@@ -96,7 +97,7 @@ public class Location implements Container{
 	
 
 	public String toString() {
-		String s = "Location ("+x+", "+y+") \n"
+		String s = "Location ("+y+", "+x+") \n"
 				+ "Terrain: " + terrain +"\n"
 				+ "Items: " + items.toString();
 		return s;
@@ -106,6 +107,12 @@ public class Location implements Container{
 	@Override
 	public int getTotalSlots() {
 		return Integer.MAX_VALUE;
+	}
+	
+
+	@Override
+	public void setTotalSlots(int size) {
+		return;
 	}
 	
 

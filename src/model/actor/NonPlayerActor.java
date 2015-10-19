@@ -2,18 +2,23 @@ package model.actor;
 
 import model.item.Item;
 
-public class NonPlayerActor extends AbstractActor {
-	
-	public enum Disposition { FRIENDLY, NEUTRAL, HOSTILE; }
+public class NonPlayerActor extends Actor {
 	
 	// determines whether this npc helps, ignores, or attacks the player
-	protected Disposition disposition;
+	protected Disposition disposition; 	
 
-	public NonPlayerActor(String type) {
+	
+	public NonPlayerActor() {
 		super();
 		disposition = Disposition.NEUTRAL;
 	}
 
+
+	public void setDisposition(Disposition d) {
+		disposition = d;
+	}
+
+	
 	@Override
 	public String pickUp() {
 		Item item = location.popItem();
@@ -23,10 +28,12 @@ public class NonPlayerActor extends AbstractActor {
 		return null;
 	}
 
+	
 	@Override
 	public void interact() {
 		// TODO Auto-generated method stub
-
 	}
 
+	
+	public enum Disposition { FRIENDLY, NEUTRAL, HOSTILE; }
 }
