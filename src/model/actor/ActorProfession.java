@@ -5,26 +5,26 @@ public enum ActorProfession {
 	WARRIOR("Warrior", 14, 12, 8), ROGUE("Rogue", 10, 14, 10), MAGE("Mage", 8, 12, 14);
 
 	
-	private int STR, AGI, INT;
+	private int strength, agility, intellect;
 	private String title;
 	
 	ActorProfession(String title, int strength, int agility, int intellect) {
 		this.title = title;
-		STR = strength;
-		AGI = agility;
-		INT = intellect;
+		this.strength = strength;
+		this.agility = agility;
+		this.intellect = intellect;
 	}
 
 	public int getSTR() {
-		return STR;
+		return strength;
 	}
 
 	public int getAGI() {
-		return AGI;
+		return agility;
 	}
 
 	public int getINT() {
-		return INT;
+		return intellect;
 	}
 
 	public String getTitle() {

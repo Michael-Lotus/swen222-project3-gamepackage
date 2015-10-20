@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,19 +10,19 @@ import model.item.Door;
 import model.item.Item;
 
 /**
- * Represents a 'square' or 'cell' in the game world. 
- * Has a terrain type, and can contain up to 1 Actor and any number of Items.
+ * Represents a cell, or square, in the game world. 
+ * Has a terrain type, a location, and can contain any number of Items.
  * 
  * @author Michael 300273397
  */
-public class Location implements Container{
+@SuppressWarnings("serial")
+public class Cell extends Point implements Container{
 
-	private final int y, x; 
 	private final Terrain terrain;
 	private Door door;
 
 	private List<Item> items;
-	private Actor actor;
+	//private Actor actor;
 
 	
 	/**
@@ -30,24 +31,13 @@ public class Location implements Container{
 	 * @param y - north/south coordinate
 	 * @param t - Terrain type enum
 	 */
-	public Location(int x, int y, Terrain t) {
-		this.x = x;
-		this.y = y;
+	public Cell(int x, int y, Terrain t) {
+		super(x,y);
 		terrain = t;
 		items = new ArrayList<>();
 	}
 	
-
-	public int getY() {
-		return y;
-	}
 	
-
-	public int getX() {
-		return x;
-	}
-	
-
 	public Terrain getTerrain() {
 		return terrain;
 	}
@@ -75,7 +65,7 @@ public class Location implements Container{
 		return null;
 	}
 	
-
+	/*
 	public Actor getActor() {
 		return actor;
 	}
@@ -94,7 +84,7 @@ public class Location implements Container{
 	public void removeActor() {
 		actor = null;
 	}
-	
+	*/
 
 	public String toString() {
 		String s = "Location ("+y+", "+x+") \n"

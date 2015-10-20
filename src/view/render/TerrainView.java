@@ -2,7 +2,7 @@ package view.render;
 
 import java.util.Random;
 
-import model.Location;
+import model.Cell;
 import model.Terrain;
 
 import javafx.scene.image.Image;
@@ -15,7 +15,7 @@ public class TerrainView extends ImageView {
 
 	int rand = new Random().nextInt(2) + 1; // random integer between 1 and 3 (inclusive)
 	
-	public TerrainView(Location location) {
+	public TerrainView(Cell location) {
 		
 		String filename;
 		if ( location.getTerrain() == Terrain.FLOOR ) {

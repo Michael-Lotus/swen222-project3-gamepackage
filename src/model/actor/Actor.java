@@ -1,7 +1,7 @@
 package model.actor;
 
 import model.Container;
-import model.Location;
+import model.Cell;
 
 /**
  * An Actor is anything that can move and interact with Items, and has an inventory.
@@ -12,39 +12,47 @@ public abstract class Actor {
 
 	protected final ActorStats stats;
 	protected final Container inventory;
-	protected Location location;
+	protected Cell cell;
+	
 	
 	public Actor() {
 		stats = new ActorStats();
-		inventory = new Inventory(stats.getStrength());
+		inventory = new ActorInventory(stats.getStrength());
 	}
+	
 	
 	public ActorStats getStats() {
 		return stats;
 	}
 	
+	
 	public Container getInventory() {
 		return inventory;
 	}
 	
-	public Location getLocation() {
-		return location;
+	
+	public Cell getCell() {
+		return cell;
 	}
 	
-	public void setLocation(Location loc) {
-		location = loc;
+	
+	public void setCell(Cell loc) {
+		cell = loc;
 	}
+	
 	
 	/**
 	 * Attempt to pick up any Item(s) at current Location.
 	 */
 	public abstract String pickUp();
 	
+	
 	/**
 	 * Interact with any Item(s) at current Location.
 	 */
 	public abstract void interact();
 
+	
 	public String id() {
 		return "Actor_Default";
 	}

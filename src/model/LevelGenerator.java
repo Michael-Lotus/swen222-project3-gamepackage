@@ -17,8 +17,8 @@ import model.item.Item;
 public class LevelGenerator {
 
 
-	public static Location[][] parseMap(String filename) {
-		Location[][] map;
+	public static Cell[][] parseMap(String filename) {
+		Cell[][] map;
 		// First read in the file and store as a List of rows
 		List<String> rows = new ArrayList<>();
 		try{		
@@ -31,7 +31,7 @@ public class LevelGenerator {
 			throw new RuntimeException("ERROR PARSING MAP", e);
 		}
 		// Now we can calculate map size and construct the array
-		map = new Location[rows.size()][rows.get(0).length()];
+		map = new Cell[rows.size()][rows.get(0).length()];
 
 		// Then loop through the List, constructing Locations
 		int x = 0;
@@ -42,7 +42,7 @@ public class LevelGenerator {
 			for(char c: rowChars){
 				//System.out.println("Parsing: "+c+", x="+x+", y="+y);
 				Terrain terrain = Terrain.forSymbol(c);
-				map[x][y] = new Location(x, y, terrain);
+				map[x][y] = new Cell(x, y, terrain);
 				Item item = forSymbol(c);
 				if (item != null) { 
 					map[x][y].addItem(item); 

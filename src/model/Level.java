@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.actor.Actor;
@@ -12,8 +13,8 @@ import model.actor.Actor;
  */
 public class Level {
 
-	private Location[][] levelMap;
-	private List<Actor> actors;
+	private Cell[][] levelMap;
+	private List<Actor> actors;	// player should always be index 0	(unsure if this is bad style, but it is convenient and concise.. =/ )
 
 	
 	public Level(String mapFilename) {
@@ -23,64 +24,98 @@ public class Level {
 	
 	
 	public void addActor(Actor actor, int x, int y) {
-		
-		if (levelMap[x][y].getActor() != null || levelMap[x][y].getTerrain() == Terrain.WALL) {
+		Cell cell = levelMap[x][y];
+		// first check that coordinates are a valid location
+		if ( isOccupied(cell) || cell.getTerrain() == Terrain.WALL) {
 			throw new IllegalArgumentException("Cannot place Actor at Location ("+x+","+y+")");
 		}
-		
 		actors.add(actor);
-		actor.setLocation(levelMap[x][y]);
-		levelMap[x][y].setActor(actor);
+		actor.setCell(cell);
+	}
+	
+	
+	public Actor getActor(int index) {
+		return actors.get(index);
+	}
+	
+	
+	public List<Actor> getActors() {
+		return Collections.unmodifiableList(actors);
+	}
+	
+	
+	public Actor getPlayer() {
+		return getActor(0);
+	}
+
+
+	public void playerInteract() {
+		actors.get(0).interact();
+	}
+	
+	
+	private boolean isOccupied(Cell cell) {
+		return actors.stream().anyMatch(actor -> actor.getCell() == cell);
 	}
 	
 
 	public boolean moveActor(Actor actor, Direction dir) {
-		Location oldLoc = actor.getLocation();
-		Location newLoc = getAdjacent(oldLoc, dir);
-		if(newLoc.getActor() != null){
+//		Cell oldLoc = actor.getCell();
+//		Cell newLoc = getAdjacent(oldLoc, dir);
+		if( dir == null ){
 			return false;
 		}
-		oldLoc.removeActor();
-		actor.setLocation(newLoc);
-		newLoc.setActor(actor);
+		return moveActorTo(actor, getAdjacent(actor.getCell(), dir));
+	}
+	
+	
+	public boolean movePlayer(Direction dir) {
+		return moveActor(actors.get(0), dir);
+	}
+	
+	
+	public boolean moveActorTo(Actor actor, Cell newLoc) {
+		if( isOccupied(newLoc) ){
+			return false;
+		}
+		actor.setCell(newLoc);
 		return true;
 	}
 	
 
-	public Location getLocation(int x, int y) {
+	public Cell getCell(int x, int y) {
 		return levelMap[x][y];
 	}
 	
 
-	public Location getAdjacent(Location loc, Direction dir) {
-		return levelMap[ loc.getY() + dir.getX() ][ loc.getX() + dir.getY() ];
+	public Cell getAdjacent(Cell cell, Direction dir) {
+		int newX = cell.x + dir.getX();
+		int newY = cell.y + dir.getY();
+		if(newX < 0 || newX >= levelMap.length
+				|| newY < 0 || newY >= levelMap.length){
+			// new cell is out of bounds
+			return null;
+		}
+		return levelMap[newX][newY];
 	}
 	
 
-	public List<Location> getAllAdjacent(Location loc) {
-
+	public List<Cell> getAllAdjacent(Cell cell) {
 		// return new BoundedLocationGrid(this.locationGrid, loc.x - 1, loc.y - 1, 3, 3);
-
-		ArrayList<Location> adjacentLocations = new ArrayList<>();
-		int x = loc.getY();
-		int y = loc.getX();
+		ArrayList<Cell> adjacentLocations = new ArrayList<>();
 		for(Direction direction: Direction.values()){
-			int newX = x + direction.getX();
-			int newY = y + direction.getY();
-			if(newX < 0 || newX >= levelMap.length
-					|| newY < 0 || newY >= levelMap.length){
-				// if a direction would go out of bounds, skip it
-				continue;
-			}
-			adjacentLocations.add(levelMap[newX][newY]);
+			Cell adjacent = getAdjacent(cell, direction);
+			if(adjacent != null){ adjacentLocations.add(adjacent); }
 		}
 		return adjacentLocations;
 	}
 	
 
-	public Location[][] getLevelMap() {
+	public Cell[][] getLevelMap() {
 		return levelMap;
 	}
+
+
 
 
 	/*

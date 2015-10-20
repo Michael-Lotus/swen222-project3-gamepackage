@@ -21,9 +21,9 @@ public class NonPlayerActor extends Actor {
 	
 	@Override
 	public String pickUp() {
-		Item item = location.popItem();
+		Item item = cell.popItem();
 		if(!inventory.addItem(item)){
-			location.addItem(item);
+			cell.addItem(item);
 		}
 		return null;
 	}

@@ -18,11 +18,11 @@ public class PlayerActor extends Actor {
 	
 	@Override
 	public String pickUp() {
-		Item item = location.popItem();
+		Item item = cell.popItem();
 		if(inventory.addItem(item)){
 			return "Picked up " + item.title();
 		} else if (item != null){
-			location.addItem(item);
+			cell.addItem(item);
 			return "Inventory full.";
 		}
 		return null;

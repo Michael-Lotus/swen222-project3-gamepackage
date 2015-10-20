@@ -1,22 +1,26 @@
 package control;
 
-import model.Terrain;
 import view.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
-public class Controller {
+public class WelcomeController {
 
 	private Main mainApplication;
 	
-	
+	@FXML
 	public void newGame(ActionEvent event) {
 		event.consume();
 		System.out.println("New Game button pressed");
-		mainApplication.startNewGame();
+		try {
+			mainApplication.startNewGame();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
+
+	@FXML
 	public void exitGame(ActionEvent event) {
 		System.out.println("Exit button pressed");
 		Platform.exit();
@@ -25,7 +29,7 @@ public class Controller {
 	
 
 	public void initialize() {
-		System.out.println("Controller initialized");
+		System.out.println("WelcomeController initialized");
 	}
 	
 

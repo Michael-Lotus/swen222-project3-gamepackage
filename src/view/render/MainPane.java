@@ -1,8 +1,9 @@
 package view.render;
 
 import model.Level;
-import model.Location;
+import model.Cell;
 import model.Terrain;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -10,44 +11,35 @@ import javafx.scene.layout.GridPane;
  */
 public class MainPane extends GridPane {
 
-	private Level level;
-
-
-	public MainPane(Level level) {
-		super();
-		this.level = level;
-	}
-
-
-	public void loadLocations() {
+	
+	public void loadLevel(Level level) {
 		// for each Location in the Level,
-		for (Location[] row : level.getLevelMap()) {
-			for (Location location : row) { 	
-				//System.out.println("Drawing Location: "+location.getY()+", "+location.getX());
+		for (Cell[] row : level.getLevelMap()) {
+			for (Cell cell : row) { 	
+				int cellX = (int) cell.getX();
+				int cellY = (int) cell.getY();
 				// add a terrain image to the grid at that Location's coordinates
-				add(new TerrainView(location), location.getY(), location.getX());
+				add(new TerrainView(cell), cellY, cellX);
 				
 				// then, if there are Items/Doors/Actors there, add those images over the top
-				if( !location.isEmpty() ){
-					location.getItems().stream().forEach(item 
-							-> add(new ItemView(item), location.getY(), location.getX()));
+				if( !cell.isEmpty() ){
+					add(new ImageView("file:images/SHADOW.png"), cellY, cellX);
+					cell.getItems().stream().forEach(item 
+							-> add(new ItemView(item), cellY, cellX));
 				}
-				if( location.getDoor() != null ) {
-					ItemView doorImage = new ItemView(location.getDoor());
+				if( cell.getDoor() != null ) {
+					ItemView doorImage = new ItemView(cell.getDoor());
 					// check which way the door should be orientated
-					if (row[ location.getY() - 1 ].getTerrain() == Terrain.FLOOR) {
+					if (row[ cellY - 1 ].getTerrain() == Terrain.FLOOR) {
 						doorImage.setRotate(270);
 					}
-					add(doorImage, location.getY(), location.getX());
-				}
-				if( location.getActor() != null ) {
-					add(new ActorView(location.getActor()), location.getY(), location.getX());
+					add(doorImage, cellY, cellX);
 				}
 
 			}
 		}
-		 
+		level.getActors().stream().forEach(actor -> add(new ImageView("file:images/SHADOW.png"), (int)actor.getCell().getY(), (int)actor.getCell().getX()));
+		level.getActors().stream().forEach(actor -> add(new ActorView(actor), (int)actor.getCell().getY(), (int)actor.getCell().getX()));
 	}
-
 
 }

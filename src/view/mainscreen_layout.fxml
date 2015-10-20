@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyTyped" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.MainController">
+   
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+            <Button fx:id="interactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#interactPressed" prefHeight="25.0" text="Interact" textAlignment="CENTER" />
+        </buttons>
+      </ButtonBar>
+   </bottom>
+   
+   <center>
+      <view.render.MainPane BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" >
+      </view.render.MainPane>
+   </center>
+   
+</BorderPane>

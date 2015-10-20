@@ -12,14 +12,14 @@ import model.item.Item;
  * 
  * @author Michael 300273397
  */
-public class Inventory implements Container {
+public class ActorInventory implements Container {
 
 	private int totalSlots;
 	private int slotsUsed;
 	private List<Item> items;
 	
 	
-	public Inventory(int size) {
+	public ActorInventory(int size) {
 		totalSlots = size;
 		items = new ArrayList<>();
 	}

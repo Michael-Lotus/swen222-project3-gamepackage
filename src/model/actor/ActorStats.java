@@ -1,49 +1,49 @@
 package model.actor;
 
 /**
- * STR: Strength determines weapon damage and inventory size
- * AGI: Agility determines weapon hit chance and speed
- * INT: Intellect determines spell damage and literacy
+ * Strength determines weapon damage and inventory size
+ * Agility determines weapon hit chance and speed
+ * Intellect determines spell damage and literacy
  */
 class ActorStats {
 
-	private int STR, AGI, INT;
+	private int strength, agility, intellect;
 	
 	
 	public ActorStats() {
-		STR = 10;
-		AGI = 10;
-		INT = 10;
+		strength = 10;
+		agility = 10;
+		intellect = 10;
 	}
 	
 	
 	public int getStrength() {
-		return STR;
+		return strength;
 	}
 	
 
 	public void setStrength(int strength) {
-		STR = strength;
+		this.strength = strength;
 	}
 	
 
 	public int getAgility() {
-		return AGI;
+		return agility;
 	}
 	
 
 	public void setAgility(int agility) {
-		AGI = agility;
+		this.agility = agility;
 	}
 	
 
 	public int getIntellect() {
-		return INT;
+		return intellect;
 	}
 	
 
 	public void setIntellect(int intellect) {
-		INT = intellect;
+		this.intellect = intellect;
 	}
 
 }
