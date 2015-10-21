@@ -43,6 +43,8 @@ public class MainController {
 		playerCell = mainApplication.getLevel().getPlayer().getCell();
 		System.out.println("Player Location = ("+playerCell.x+", "+playerCell.y+")");
 		
+		mainApplication.updateActors();
+		
 		event.consume();
 	}
 

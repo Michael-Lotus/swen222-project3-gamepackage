@@ -13,6 +13,7 @@ public class ItemView extends ImageView {
 	private Item item;
 	
 	public ItemView(Item item) {
+		super();
 		this.item = item;
 		//System.out.println("LOADING: images/" + item.id() + ".png");
 		try {

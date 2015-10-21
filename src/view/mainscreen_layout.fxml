@@ -3,20 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import view.render.CellPane?>
+<?import view.render.ActorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyTyped" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.MainController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyTyped" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.MainController" onMouseClicked="#mouseClicked">
    
-   <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <buttons>
-            <Button fx:id="interactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#interactPressed" prefHeight="25.0" text="Interact" textAlignment="CENTER" />
-        </buttons>
-      </ButtonBar>
-   </bottom>
+	<children>
+	
+		<CellPane>
+		</CellPane>
+		
+		<ActorPane>
+		</ActorPane>
+		
+		<AnchorPane>
+			<children>
+				<Button fx:id="interactButton" mnemonicParsing="false" onAction="#interactPressed" text="Interact" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
+			</children>
+		</AnchorPane>
+		
+	</children>
    
-   <center>
-      <view.render.MainPane BorderPane.alignment="CENTER" onMouseClicked="#mouseClicked" >
-      </view.render.MainPane>
-   </center>
-   
-</BorderPane>
+</StackPane>

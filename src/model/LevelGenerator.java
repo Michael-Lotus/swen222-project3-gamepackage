@@ -9,6 +9,7 @@ import model.item.Chest;
 import model.item.Door;
 import model.item.Gold;
 import model.item.Item;
+import model.item.Key;
 
 /**
  * 
@@ -61,6 +62,7 @@ public class LevelGenerator {
 		case '/': return new Door();
 		case '$': return new Gold(10);
 		case 'X': return new Chest();
+		case '&': return new Key();
 		default: return null;
 		}
 	}

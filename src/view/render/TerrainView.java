@@ -16,14 +16,13 @@ public class TerrainView extends ImageView {
 	int rand = new Random().nextInt(2) + 1; // random integer between 1 and 3 (inclusive)
 	
 	public TerrainView(Cell location) {
-		
+		super();
 		String filename;
 		if ( location.getTerrain() == Terrain.FLOOR ) {
 			filename = location.getTerrain() + "_" + rand + ".png";
 		} else {
 			filename = location.getTerrain() + ".png";
 		}
-		
 		//System.out.println("LOADING: images/"+filename);
 		try {
 		     this.setImage(new Image("file:images/"+filename));

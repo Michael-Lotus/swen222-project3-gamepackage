@@ -6,7 +6,8 @@ import java.awt.Point;
 import model.Level;
 import model.actor.*;
 import control.*;
-import view.render.MainPane;
+import view.render.ActorPane;
+import view.render.CellPane;
 import view.ui.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -27,7 +29,8 @@ public class Main extends Application {
 	private Stage mainScreen = new MainStage();
 	private final int cellSize = 64;
 	private Level level;
-	private Node mainPane;
+	private CellPane cellPane;
+	private ActorPane actorPane;
 
 
 	@Override
@@ -55,23 +58,25 @@ public class Main extends Application {
 		FXMLLoader loader;
 		try { loader = new FXMLLoader(getClass().getResource("mainscreen_layout.fxml")); } 
 		catch (Exception e) { throw new Exception("ERROR LOADING 'mainscreen_layout.fxml'", e); }
-		BorderPane root = loader.load();
+		StackPane root = loader.load();
 
 		// provide the controller with a reference to this instantiation of Main
 		loader.<MainController>getController().setMainApplication(this);
 
-		mainPane = root.getCenter();
+		cellPane = (CellPane) root.getChildren().get(0);
+		actorPane = (ActorPane) root.getChildren().get(1);
 		mainScreen.setScene(new Scene(root));
-		
-		((MainPane)root.getCenter()).loadLevel(level);
+		cellPane.loadLevel(level);
+		actorPane.loadAllActors(level);
+		actorPane.positionAllActors(cellSize);
 		
 		mainScreen.show();
 		welcomeScreen.hide();
 	}
 	
 	
-	public Bounds getMainPaneBounds() {
-		return mainPane.getLayoutBounds();
+	public Bounds getCellPaneBounds() {
+		return cellPane.getLayoutBounds();
 	}
 	
 	
@@ -93,5 +98,10 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+
+	public void updateActors() {
+		actorPane.positionAllActors(cellSize);
 	}
 }

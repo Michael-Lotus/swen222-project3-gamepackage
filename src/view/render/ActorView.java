@@ -12,6 +12,7 @@ public class ActorView extends ImageView {
 	private Actor actor;
 	
 	public ActorView(Actor actor) {
+		super();
 		this.actor = actor;
 		//System.out.println("LOADING: images/" + actor.id() + ".png");
 		try {
