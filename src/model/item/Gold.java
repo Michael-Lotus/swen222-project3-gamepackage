@@ -8,55 +8,45 @@ import model.actor.Actor;
  * @author Michael
  */
 public class Gold extends Item {
-	
+
 	private int amount;
-	
-	
+
 	public Gold() {
 		this(1);
 	}
-	
-	
+
 	public Gold(int amount) {
 		this.amount = amount;
 	}
 
-	
 	public void adjustAmount(int amount) {
 		this.amount += amount;
 	}
-	
-	
+
 	public int getAmount() {
 		return amount;
 	}
 
-	
 	public void interaction(Actor actor) {
 		// TODO
 	}
 
-	
 	public boolean isContainable() {
 		return true;
 	}
 
-	
 	public int slotsNeeded() {
 		return 0;
 	}
 
-	
 	public String title() {
-		return amount+" gold";
+		return amount + " gold";
 	}
 
-	
 	public String description() {
 		return "Oooh, shiny...";
 	}
 
-	
 	public String id() {
 		return "Gold";
 	}

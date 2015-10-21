@@ -10,10 +10,10 @@ import view.render.ActorPane;
 import view.render.CellPane;
 
 public class MainStage extends FxmlStage {
-	
+
 	private CellPane cellPane;
 	private ActorPane actorPane;
-	
+
 	public MainStage() {
 		this("MainScreenLayout.fxml");
 	}
@@ -31,10 +31,9 @@ public class MainStage extends FxmlStage {
 		} catch (Exception e) {
 			throw new IOException("ERROR LOADING " + fxmlFilename, e);
 		}
-		
 
 		StackPane root = loader.load();
-		
+
 		try {
 			controller = loader.<Controller> getController();
 		} catch (Exception e) {
@@ -45,13 +44,13 @@ public class MainStage extends FxmlStage {
 		cellPane = (CellPane) root.getChildren().get(0);
 		actorPane = (ActorPane) root.getChildren().get(1);
 	}
-	
+
 	public CellPane getCellPane() {
 		return cellPane;
 	}
-	
+
 	public ActorPane getActorPane() {
 		return actorPane;
 	}
-	
+
 }

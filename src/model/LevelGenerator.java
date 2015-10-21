@@ -17,18 +17,17 @@ import model.item.Key;
  */
 public class LevelGenerator {
 
-
 	public static Cell[][] parseMap(String filename) {
 		Cell[][] map;
 		// First read in the file and store as a List of rows
 		List<String> rows = new ArrayList<>();
-		try{		
+		try {
 			Scanner sc = new Scanner(new File(filename));
-			while (sc.hasNextLine()){
+			while (sc.hasNextLine()) {
 				rows.add(sc.nextLine());
 			}
 			sc.close();
-		}catch (Exception e){
+		} catch (Exception e) {
 			throw new RuntimeException("ERROR PARSING MAP", e);
 		}
 		// Now we can calculate map size and construct the array
@@ -36,18 +35,16 @@ public class LevelGenerator {
 
 		// Then loop through the List, constructing Locations
 		int x = 0;
-		for(String row: rows){
+		for (String row : rows) {
 			int y = 0;
 			char[] rowChars = row.toCharArray();
 
-			for(char c: rowChars){
-				//System.out.println("Parsing: "+c+", x="+x+", y="+y);
+			for (char c : rowChars) {
 				Terrain terrain = Terrain.forSymbol(c);
 				map[x][y] = new Cell(x, y, terrain);
 				Item item = forSymbol(c);
-				if (item != null) { 
-					map[x][y].addItem(item); 
-					System.out.println(item.title()+" added at location "+x+", "+y); 
+				if (item != null) {
+					map[x][y].addItem(item);
 				}
 				y++;
 			}
@@ -56,14 +53,18 @@ public class LevelGenerator {
 		return map;
 	}
 
-
 	private static Item forSymbol(char c) {
 		switch (c) {
-		case '/': return new Door();
-		case '$': return new Gold(10);
-		case 'X': return new Chest();
-		case '&': return new Key();
-		default: return null;
+		case '/':
+			return new Door();
+		case '$':
+			return new Gold(10);
+		case 'X':
+			return new Chest();
+		case '&':
+			return new Key();
+		default:
+			return null;
 		}
 	}
 

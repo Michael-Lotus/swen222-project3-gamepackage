@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import control.Controller;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -24,24 +23,24 @@ public class FxmlStage extends Stage {
 
 	public void loadLayout() throws IOException {
 		FXMLLoader loader;
-		
+
 		try {
 			loader = new FXMLLoader(getClass().getResource(fxmlFilename));
 		} catch (Exception e) {
 			throw new IOException("ERROR LOADING " + fxmlFilename, e);
 		}
-		
+
 		Parent root = loader.load();
-		
+
 		try {
 			controller = loader.<Controller> getController();
 		} catch (Exception e) {
 			throw new IOException("ERROR LOADING CONTROLLER", e);
 		}
-		
+
 		setScene(new Scene(root));
 	}
-	
+
 	public Controller getController() {
 		return controller;
 	}

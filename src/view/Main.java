@@ -35,17 +35,17 @@ public class Main extends Application {
 		} catch (Exception e) {
 			throw new IOException("ERROR LOADING LEVEL", e);
 		}
-		
+
 		selectionScreen = new FxmlStage("SelectionScreenLayout.fxml");
 		selectionScreen.loadLayout();
 		selectionScreen.getController().setMainApplication(this);
-		
+
 		selectionScreen.show();
 	}
 
 	public void startMainScreen() throws IOException {
 		selectionScreen.hide();
-		
+
 		mainScreen = new MainStage();
 		mainScreen.loadLayout();
 		mainScreen.getController().setMainApplication(this);
@@ -55,7 +55,7 @@ public class Main extends Application {
 
 		mainScreen.show();
 	}
-	
+
 	public int getCellSize() {
 		return cellSize;
 	}
@@ -67,15 +67,14 @@ public class Main extends Application {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-	
+
 	public void createPlayerActor(ActorProfession profession, int x, int y) {
-		if (profession != null){
+		if (profession != null) {
 			level.addActor(new PlayerActor(profession), x, y);
 		} else {
 			level.addActor(new NonPlayerActor(), x, y);
 		}
 	}
-	
 
 	public void updateActors() {
 		mainScreen.getActorPane().positionAllActors(cellSize);

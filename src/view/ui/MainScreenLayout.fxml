@@ -6,25 +6,28 @@
 <?import view.render.CellPane?>
 <?import view.render.ActorPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyTyped" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.MainController" onMouseClicked="#mouseClicked">
-   	<stylesheets>
-		<URL value="@UiStyle.css" />
-	</stylesheets>
-	
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyTyped"
+	xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="control.MainController" onMouseClicked="#mouseClicked">
+
 	<children>
-	
+
 		<CellPane>
 		</CellPane>
-		
+
 		<ActorPane>
 		</ActorPane>
-		
+
 		<AnchorPane>
 			<children>
-				<Button fx:id="interactButton" mnemonicParsing="false" onAction="#interactPressed" text="Interact" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
+				<Button fx:id="interactButton" mnemonicParsing="false"
+					onAction="#interactPressed" text="Interact"
+					AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="200.0"
+					AnchorPane.rightAnchor="200.0" />
 			</children>
 		</AnchorPane>
-		
+
 	</children>
-   
+
 </StackPane>

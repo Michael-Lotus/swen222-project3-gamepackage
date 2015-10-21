@@ -9,35 +9,32 @@ public class PlayerActor extends Actor {
 	public PlayerActor(ActorProfession profession) {
 		super();
 		this.profession = profession;
-		stats.setStrength(profession.getSTR());
-		stats.setAgility(profession.getAGI());
-		stats.setIntellect(profession.getINT());
+		stats.setStrength(profession.getStrength());
+		stats.setAgility(profession.getAgility());
+		stats.setIntellect(profession.getIntellect());
 		inventory.setTotalSlots(stats.getStrength());
 	}
 
-	
 	@Override
 	public String pickUp() {
 		Item item = cell.popItem();
-		if(inventory.addItem(item)){
+		if (inventory.addItem(item)) {
 			return "Picked up " + item.title();
-		} else if (item != null){
+		} else if (item != null) {
 			cell.addItem(item);
 			return "Inventory full.";
 		}
 		return null;
 	}
-	
 
 	@Override
 	public void interact() {
-		
+
 	}
-	
-	
+
 	@Override
 	public String id() {
-		return "Actor_"+profession.getTitle();
+		return "Actor_" + profession.getTitle();
 	}
-	
+
 }

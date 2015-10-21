@@ -4,9 +4,8 @@ import model.actor.Actor;
 
 public class Key extends Item {
 
-
 	public void interaction(Actor actor) {
-		// TODO 
+		// TODO
 	}
 
 	public boolean isContainable() {

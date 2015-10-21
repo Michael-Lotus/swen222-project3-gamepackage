@@ -1,9 +1,9 @@
 package model;
 
 public enum Direction {
-	NORTHWEST(+1,-1), NORTH(0,-1), NORTHEAST(-1,-1), 
+	NORTHWEST(+1,-1), NORTH(0,-1), 	NORTHEAST(-1,-1), 
 	EAST(+1,0), 					WEST(-1,0),
-	SOUTHEAST(+1,+1), SOUTH(0,+1), SOUTHWEST(-1,+1);
+	SOUTHEAST(+1,+1), SOUTH(0,+1), 	SOUTHWEST(-1,+1);
 	
 	private final int x,y;
 	
@@ -22,7 +22,8 @@ public enum Direction {
 
 	/**
 	 * Returns the Direction towards a Point, relative to an arbitrary origin (0,0).
-	 * Uses standard coordinate system for displays, so positive y's point south, positive x's point east.
+	 * Uses standard coordinate system for displays, so positive y's point south, 
+	 * positive x's point east.
 	 * 
 	 * (currently only returns NORTH/SOUTH/EAST/WEST)
 	 */
