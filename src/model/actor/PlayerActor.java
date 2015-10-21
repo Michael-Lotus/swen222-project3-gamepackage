@@ -6,9 +6,9 @@ public class PlayerActor extends Actor {
 
 	private ActorProfession profession;
 
-	public PlayerActor(ActorProfession playerClass) {
+	public PlayerActor(ActorProfession profession) {
 		super();
-		profession = playerClass;
+		this.profession = profession;
 		stats.setStrength(profession.getSTR());
 		stats.setAgility(profession.getAGI());
 		stats.setIntellect(profession.getINT());

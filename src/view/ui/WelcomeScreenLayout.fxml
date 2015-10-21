@@ -18,7 +18,7 @@
 	</padding>
 
 	<stylesheets>
-		<URL value="@welcomescreen_style.css" />
+		<URL value="@UiStyle.css" />
 	</stylesheets>
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />

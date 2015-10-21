@@ -7,7 +7,10 @@
 <?import view.render.ActorPane?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyTyped" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.MainController" onMouseClicked="#mouseClicked">
-   
+   	<stylesheets>
+		<URL value="@UiStyle.css" />
+	</stylesheets>
+	
 	<children>
 	
 		<CellPane>

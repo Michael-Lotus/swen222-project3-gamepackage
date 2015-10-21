@@ -1,107 +1,88 @@
 package view;
 
-
-import java.awt.Point;
+import java.io.IOException;
 
 import model.Level;
 import model.actor.*;
-import control.*;
-import view.render.ActorPane;
-import view.render.CellPane;
-import view.ui.*;
+import view.ui.FxmlStage;
+import view.ui.MainStage;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Main Application class for handling Stages (windows) and launching game.
  */
 public class Main extends Application {
 
-	private Stage welcomeScreen = new WelcomeStage(StageStyle.UTILITY);
-	private Stage mainScreen = new MainStage();
+	private MainStage mainScreen;
+	private FxmlStage selectionScreen;
+	private FxmlStage welcomeScreen;
 	private final int cellSize = 64;
 	private Level level;
-	private CellPane cellPane;
-	private ActorPane actorPane;
-
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-
-		// load welcome screen fxml document
-		FXMLLoader loader;
-		try { loader = new FXMLLoader(getClass().getResource("welcomescreen_layout.fxml")); } 
-		catch (Exception e) { throw new Exception("ERROR LOADING 'welcomescreen_layout.fxml'", e); }
-		Pane root = loader.load();
-
-		// provide the controller with a reference to this instantiation of Main
-		loader.<WelcomeController>getController().setMainApplication(this);
-
-		welcomeScreen.setScene(new Scene(root));
+	public void start(Stage primaryStage) throws IOException {
+		welcomeScreen = new FxmlStage("WelcomeScreenLayout.fxml");
+		welcomeScreen.loadLayout();
+		welcomeScreen.getController().setMainApplication(this);
 		welcomeScreen.show();
 	}
 
-
-	public void startNewGame() throws Exception {
-		try { setLevel(new Level("data/map.txt")); } 
-		catch (Exception e) { throw new IllegalArgumentException ("ERROR LOADING LEVEL", e); }
-
-		// load main screen fxml document
-		FXMLLoader loader;
-		try { loader = new FXMLLoader(getClass().getResource("mainscreen_layout.fxml")); } 
-		catch (Exception e) { throw new Exception("ERROR LOADING 'mainscreen_layout.fxml'", e); }
-		StackPane root = loader.load();
-
-		// provide the controller with a reference to this instantiation of Main
-		loader.<MainController>getController().setMainApplication(this);
-
-		cellPane = (CellPane) root.getChildren().get(0);
-		actorPane = (ActorPane) root.getChildren().get(1);
-		mainScreen.setScene(new Scene(root));
-		cellPane.loadLevel(level);
-		actorPane.loadAllActors(level);
-		actorPane.positionAllActors(cellSize);
-		
-		mainScreen.show();
+	public void startSelectionScreen() throws IOException {
 		welcomeScreen.hide();
+		try {
+			setLevel(new Level("data/map.txt"));
+		} catch (Exception e) {
+			throw new IOException("ERROR LOADING LEVEL", e);
+		}
+		
+		selectionScreen = new FxmlStage("SelectionScreenLayout.fxml");
+		selectionScreen.loadLayout();
+		selectionScreen.getController().setMainApplication(this);
+		
+		selectionScreen.show();
 	}
-	
-	
-	public Bounds getCellPaneBounds() {
-		return cellPane.getLayoutBounds();
+
+	public void startMainScreen() throws IOException {
+		selectionScreen.hide();
+		
+		mainScreen = new MainStage();
+		mainScreen.loadLayout();
+		mainScreen.getController().setMainApplication(this);
+		mainScreen.getCellPane().loadLevel(level);
+		mainScreen.getActorPane().loadAllActors(level);
+		mainScreen.getActorPane().positionAllActors(cellSize);
+
+		mainScreen.show();
 	}
-	
 	
 	public int getCellSize() {
 		return cellSize;
 	}
-	
-	
+
 	public Level getLevel() {
 		return level;
 	}
-	
 
 	public void setLevel(Level level) {
 		this.level = level;
-		level.addActor(new NonPlayerActor(), 1, 1);
 	}
+	
+	public void createPlayerActor(ActorProfession profession, int x, int y) {
+		if (profession != null){
+			level.addActor(new PlayerActor(profession), x, y);
+		} else {
+			level.addActor(new NonPlayerActor(), x, y);
+		}
+	}
+	
 
+	public void updateActors() {
+		mainScreen.getActorPane().positionAllActors(cellSize);
+	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-
-	public void updateActors() {
-		actorPane.positionAllActors(cellSize);
-	}
 }

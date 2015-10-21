@@ -1,23 +1,13 @@
 package control;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
 import model.Cell;
 import model.Direction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-//import javafx.geometry.Bounds;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import view.Main;
 
-public class MainController {
-
-	private Main mainApplication;
+public class MainController extends Controller{
 
 	@FXML
 	public void keyTyped(KeyEvent event) {
@@ -31,7 +21,6 @@ public class MainController {
 		
 		Cell playerCell = mainApplication.getLevel().getPlayer().getCell();
 		int cellSize = mainApplication.getCellSize();
-		//Bounds offset = mainApplication.getMainPaneBounds();
 		
 		double xDiff = playerCell.getX() * cellSize + cellSize/2 - event.getSceneX();
 		double yDiff = playerCell.getY() * cellSize + cellSize/2 - event.getSceneY();
@@ -58,10 +47,6 @@ public class MainController {
 		System.out.println("MainController initialized");
 	}
 
-
-	public void setMainApplication(Main main) {
-		mainApplication = main;
-	}
 
 
 }

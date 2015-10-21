@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="control.SelectionController">
+	<stylesheets>
+		<URL value="@UiStyle.css" />
+	</stylesheets>
+	<children>
+      <VBox layoutX="50.0" layoutY="80.0" prefHeight="160.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <Button fx:id="warriorButton" alignment="CENTER" mnemonicParsing="false" onAction="#warriorPressed" prefHeight="25.0" prefWidth="100.0" text="Warrior" />
+            <Button fx:id="rogueButton" mnemonicParsing="false" onAction="#roguePressed" prefHeight="25.0" prefWidth="100.0" text="Rogue" />
+            <Button fx:id="mageButton" mnemonicParsing="false" onAction="#magePressed" prefHeight="25.0" prefWidth="100.0" text="Mage" />
+            <Button fx:id="noneButton" mnemonicParsing="false" onAction="#nonePressed" prefHeight="25.0" prefWidth="100.0" text="None" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
